@@ -1,0 +1,54 @@
+// ConsoleApplication1.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
+//
+#include <iostream>
+using namespace std;
+
+int opcion, a, b;
+int main() {    //Acá vamos a declarar las variables
+
+	int opcion;
+	do {
+		cout << "Menu" << endl;
+		cout << "1.Suma de dos numeros" << endl;
+		cout << "2.Ver si un numero es positivo o negativo " << endl;
+		cout << "3.Factorial de un numero" << endl;
+		cout << "Escriba la opcion que desea realizar" << endl;
+		cin >> opcion;
+		switch (opcion) {
+		case 1:
+			cout << "Ingresa el primer valor";
+			cin >> a;
+			cout << endl << "Ingresa el segundo valor";
+			cin >> b;
+			cout << "La suma es: " << a + b << endl;
+			break;
+
+		case 2:
+			cout << "Pedir un numero:";
+			cin >> a;
+			if (a > 0)
+				cout << "El numero es positivo";
+			else
+				cout << "El numero es negativo";
+			break;
+
+
+		case 3:
+			cout << "Ingresa el numero hasta donde va a realizarse el factorial:";
+			cin >> a;
+			b = 1;
+			for (int i = 2; i <= a; i++)
+				b = b * i;  //b es un acumulador, i es un contador
+			cout << "El factorial de" << a << "es" << b << endl;
+			break;
+
+		case 0:
+			cout << "Salir" << endl;
+			break;
+
+		default:
+			cout << "Error" << endl;
+		}
+	} while (opcion != 0);
+	return 0;
+}
