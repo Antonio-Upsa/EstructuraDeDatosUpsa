@@ -1,0 +1,72 @@
+#include <iostream>
+#define MAX 10
+
+using namespace std;
+
+void serie(int n, int num);
+void cargar(int vec[], int n);
+void mostrar(int vec[], int n);
+void cargarmatriz(int maz[MAX][MAX], int m, int n);
+
+int main(){
+    
+    int opcion, n, vec[MAX], m, n2;
+    int maz[MAX][MAX];
+
+    do{
+        cout << "MENU\n";
+        cout << "1. Serie\n";
+        cout << "2. Cargar Vector\n";
+        cout << "3. Cargar Matriz\n";
+        cout << "0. Salir\n";
+        cout << "Elija una opcion: ";
+        cin >> opcion;
+
+        switch(opcion){
+        
+        case 1:
+            cout << "Ingrese n: ";
+            cin >> n;
+            serie(n, 1);
+            break;
+        
+        case 2:
+            cout << "Ingrese tamaño del vector: ";
+            cin >> n;
+            cargar(vec, n);
+            mostrar(vec, n);
+            break;
+        
+        case 3:
+            cout << "Filas: ";
+            cin >> m;
+            cout << "Columnas: ";
+            cin >> n2;
+            cargarmatriz(maz, m, n2);
+            break;
+        
+        case 0:
+            cout << "Saliendo...";
+            break;
+        
+        default:
+            cout << "ERROR";
+        }
+
+    } while (opcion != 0);
+    
+}
+
+void serie(int n, int num){
+    if (n == 1){
+        cout << "1";
+        return;
+    } else {
+        cout << num << endl;
+    }
+    serie(n - 1, num + 3);
+}
+
+void cargar(int vec[], int n){}
+void mostrar(int vec[], int n){}
+void cargarmatriz(int maz[MAX][MAX], int m, int n){}
