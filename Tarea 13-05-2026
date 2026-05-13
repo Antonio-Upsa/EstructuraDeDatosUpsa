@@ -1,0 +1,113 @@
+
+//Antonio Roca Chavez
+
+
+
+//NOTA: LA PRIMERA PARTE DEL CÓDIGO ES EL .h LA SEGUNDA EL .cpp Y EL RESTO
+
+//.h
+
+#ifndef AMIGO_H
+#define AMIGO_H
+
+#include <iostream>
+#include <fstream>
+#include <cstring>
+
+using namespace std;
+
+class Amigo {
+
+private:
+    char nombre[50];
+    char fechaNacimiento[11];
+    char sexo;
+
+public:
+
+    Amigo();
+
+    void setAmigo(string nom, string fecha, char sx);
+
+    void guardar(ofstream& archivo);
+};
+
+#endif
+
+
+
+
+
+
+
+
+
+
+//SEGUNDA PARTE 
+
+#include "Amigo.h"
+
+Amigo::Amigo() {
+    strcpy(nombre, "");
+    strcpy(fechaNacimiento, "");
+    sexo = ' ';
+}
+
+void Amigo::setAmigo(string nom, string fecha, char sx) {
+
+    strncpy(nombre, nom.c_str(), sizeof(nombre) - 1);
+    nombre[sizeof(nombre) - 1] = '\0';
+
+    strncpy(fechaNacimiento, fecha.c_str(), sizeof(fechaNacimiento) - 1);
+    fechaNacimiento[sizeof(fechaNacimiento) - 1] = '\0';
+
+    sexo = sx;
+}
+
+void Amigo::guardar(ofstream& archivo) {
+
+    archivo.write(reinterpret_cast<char*>(this), sizeof(Amigo));
+}
+
+
+
+int main() {
+
+    string archivo = "amigos.dat";
+
+    Amigo a;
+
+    string nombre;
+    string fecha;
+    char sexo;
+
+    cout << "===== REGISTRO DE AMIGOS =====\n";
+
+    cout << "Nombre: ";
+    getline(cin, nombre);
+
+    cout << "Fecha de nacimiento (DD/MM/AAAA): ";
+    getline(cin, fecha);
+
+    cout << "Sexo (M/F): ";
+    cin >> sexo;
+
+    a.setAmigo(nombre, fecha, sexo);
+
+    ofstream fs(archivo, ios::binary | ios::app);
+
+    a.guardar(fs);
+
+    fs.close();
+
+    cout << "\nRegistro guardado en amigos.dat\n";
+
+    return 0;
+}
+
+
+//========================MENU===================================
+
+
+
+
