@@ -1,0 +1,144 @@
+//Antonio Roca
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+string invertir(string &frase);
+string quitarVocales(string &frase);
+string intercambiar(string &frase, string buscar, string reemplazo);
+string sacarSubstring(string frase, int ini, int cant);
+int contarVocales(string frase);
+string quitarEspacios(string &frase);
+int encontrar(string frase, char c);
+
+int main() {
+    string cadena;
+    int opcion;
+
+    cout << "Ingrese la frase: ";
+    getline(cin, cadena);
+
+    do {
+        cout << "\n--- MENU (Actual: [" << cadena << "]) ---" << endl;
+        cout << "1. Invertir frase" << endl;
+        cout << "2. Quitar vocales" << endl;
+        cout << "3. Intercambiar palabras" << endl;
+        cout << "4. Sacar substring" << endl;
+        cout << "5. Contar vocales" << endl;
+        cout << "6. Quitar espacios" << endl;
+        cout << "7. Encontrar caracter" << endl;
+        cout << "8. Longitud" << endl;
+        cout << "9. Comparar" << endl;
+        cout << "0. Salir" << endl;
+        cout << "Opcion: ";
+        cin >> opcion;
+        cin.ignore();
+
+        switch (opcion) {
+            case 1: cout << "Resultado: " << invertir(cadena) << endl; break;
+            case 2: cout << "Resultado: " << quitarVocales(cadena) << endl; break;
+            case 3: {
+                string b, r;
+                cout << "Buscar: "; cin >> b;
+                cout << "Reemplazo: "; cin >> r;
+                cout << "Resultado: " << intercambiar(cadena, b, r) << endl;
+                break;
+            }
+            case 4: {
+                int p, c;
+                cout << "Inicio y cantidad: "; cin >> p >> c;
+                cout << "Resultado: " << sacarSubstring(cadena, p, c) << endl;
+                break;
+            }
+            case 5: cout << "Total vocales: " << contarVocales(cadena) << endl; break;
+            case 6: cout << "Resultado: " << quitarEspacios(cadena) << endl; break;
+            case 7: {
+                char car;
+                cout << "Caracter: "; cin >> car;
+                int pos = encontrar(cadena, car);
+                if (pos != -1) cout << "Posicion: " << pos << endl;
+                else cout << "No existe" << endl;
+                break;
+            }
+            case 8: cout << "Longitud: " << cadena.length() << endl; break;
+            case 9: {
+                string otra;
+                cout << "Frase a comparar: "; getline(cin, otra);
+                if (cadena == otra) cout << "Son iguales" << endl;
+                else cout << "Son diferentes" << endl;
+                break;
+            }
+        }
+    } while (opcion != 0);
+
+    return 0;
+}
+
+string invertir(string &frase) {
+    string aux = "";
+    for (int i = frase.length() - 1; i >= 0; i--) {
+        aux += frase[i];
+    }
+    frase = aux;
+    return frase;
+}
+
+string quitarVocales(string &frase) {
+    string aux = "";
+    for (int i = 0; i < frase.length(); i++) {
+        char c = frase[i];
+        if (c!='a' && c!='e' && c!='i' && c!='o' && c!='u' &&
+            c!='A' && c!='E' && c!='I' && c!='O' && c!='U') {
+            aux += c;
+        }
+    }
+    frase = aux;
+    return frase;
+}
+
+string intercambiar(string &frase, string buscar, string reemplazo) {
+    for (int i = 0; i <= (int)frase.length() - (int)buscar.length(); i++) {
+        if (frase.substr(i, buscar.length()) == buscar) {
+            frase.replace(i, buscar.length(), reemplazo);
+            break; 
+        }
+    }
+    return frase;
+}
+
+string sacarSubstring(string frase, int ini, int cant) {
+    if (ini >= 0 && ini < frase.length()) {
+        return frase.substr(ini, cant);
+    }
+    return "Error";
+}
+
+int contarVocales(string frase) {
+    int c = 0;
+    for (int i = 0; i < frase.length(); i++) {
+        char letra = frase[i];
+        if (letra=='a'||letra=='e'||letra=='i'||letra=='o'||letra=='u'||
+            letra=='A'||letra=='E'||letra=='I'||letra=='O'||letra=='U') {
+            c++;
+        }
+    }
+    return c;
+}
+
+string quitarEspacios(string &frase) {
+    string aux = "";
+    for (int i = 0; i < frase.length(); i++) {
+        if (frase[i] != ' ') aux += frase[i];
+    }
+    frase = aux;
+    return frase;
+}
+
+int encontrar(string frase, char c) {
+    for (int i = 0; i < frase.length(); i++) {
+        if (frase[i] == c) return i;
+    }
+    return -1;
+}
